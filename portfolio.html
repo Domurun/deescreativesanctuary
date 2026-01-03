@@ -1,0 +1,88 @@
+<!-- portfolio.html (Portfolio Page) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Dee's Creative Sanctuary Video Editor</title>
+    <style>
+        /* Brand Colors from Logo */
+        :root {
+            --primary-pink: #F2B8C6;
+            --primary-purple: #C49BC3;
+            --primary-red: #B56576;
+            --primary-gold: #E1BC91;
+            --background-dark: #121212;
+            --header-bg: #000000;
+            --text-light: #FFFFFF;
+            --accent-hover: var(--primary-gold);
+        }
+
+        /* Global Styles */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: var(--background-dark); color: var(--text-light); }
+        header { background-color: var(--header-bg); padding: 20px; text-align: center; }
+        .logo { max-width: 200px; margin-bottom: 10px; }
+        nav { margin: 20px 0; }
+        nav a { color: var(--text-light); margin: 0 15px; text-decoration: none; font-weight: bold; }
+        nav a:hover { color: var(--accent-hover); }
+        section { padding: 40px; max-width: 1200px; margin: 0 auto; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .project { background: #1c1c1c; padding: 15px; text-align: center; }
+        .project iframe { width: 100%; height: 200px; }
+        .project h3 { color: var(--primary-pink); }
+        footer { background-color: var(--header-bg); text-align: center; padding: 10px; font-size: 0.8em; }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .gallery { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Dee's Creative Sanctuary Logo" class="logo">
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/portfolio.html">Portfolio</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </header>
+    
+    <section id="portfolio">
+        <h2>My Work</h2>
+        <div class="gallery">
+            <div class="project">
+                <h3>Commercial Project</h3>
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                <p>Client Brief: High-energy ad. Role: Editing & Effects. Results: 1M+ views.</p>
+            </div>
+            <div class="project">
+                <h3>Short Film</h3>
+                <iframe src="https://player.vimeo.com/video/987654321" frameborder="0" allowfullscreen></iframe>
+                <p>Challenges: Tight deadline. Overcame with efficient workflow. Award: Best Editing at Fest.</p>
+            </div>
+            <div class="project">
+                <h3>Social Media Video</h3>
+                <iframe src="https://www.youtube.com/embed/anotherVideoID" frameborder="0" allowfullscreen></iframe>
+                <p>Before/After: Improved pacing. Techniques: Keyframing & Transitions.</p>
+            </div>
+            <!-- Add more projects as needed -->
+        </div>
+    </section>
+    
+    <footer>
+        &copy; 2026 Dee's Creative Sanctuary. All rights reserved.
+    </footer>
+    
+    <script>
+        // JS for lazy loading iframes (improves performance)
+        document.addEventListener('DOMContentLoaded', () => {
+            const iframes = document.querySelectorAll('iframe');
+            iframes.forEach(iframe => {
+                iframe.setAttribute('loading', 'lazy');
+            });
+        });
+    </script>
+</body>
+</html>

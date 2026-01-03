@@ -1,0 +1,105 @@
+<!-- contact.html (Contact Page) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Dee - Video Editor</title>
+    <style>
+        /* Brand Colors from Logo */
+        :root {
+            --primary-pink: #F2B8C6;
+            --primary-purple: #C49BC3;
+            --primary-red: #B56576;
+            --primary-gold: #E1BC91;
+            --background-dark: #121212;
+            --header-bg: #000000;
+            --text-light: #FFFFFF;
+            --accent-hover: var(--primary-gold);
+            --button-bg: var(--primary-red);
+            --button-hover: var(--primary-purple);
+        }
+
+        /* Global Styles */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: var(--background-dark); color: var(--text-light); }
+        header { background-color: var(--header-bg); padding: 20px; text-align: center; }
+        .logo { max-width: 200px; margin-bottom: 10px; }
+        nav { margin: 20px 0; }
+        nav a { color: var(--text-light); margin: 0 15px; text-decoration: none; font-weight: bold; }
+        nav a:hover { color: var(--accent-hover); }
+        section { padding: 40px; max-width: 1200px; margin: 0 auto; }
+        form { display: flex; flex-direction: column; max-width: 600px; margin: 0 auto; }
+        form label { margin: 10px 0 5px; }
+        form input, form textarea { padding: 10px; background: #1c1c1c; border: 1px solid #333; color: var(--text-light); }
+        form button { background: var(--button-bg); color: var(--text-light); padding: 10px; border: none; cursor: pointer; margin-top: 10px; }
+        form button:hover { background: var(--button-hover); }
+        footer { background-color: var(--header-bg); text-align: center; padding: 10px; font-size: 0.8em; }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form { padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Dee's Creative Sanctuary Logo" class="logo">
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="/portfolio.html">Portfolio</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </header>
+    
+    <section id="contact">
+        <h2>Get in Touch</h2>
+        <p>Email: dee@creativesanctuary.com | LinkedIn: linkedin.com/in/deecreativesanctuary | Phone: (123) 456-7890</p>
+        <form id="contact-form">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+            
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+    
+    <footer>
+        &copy; 2026 Dee's Creative Sanctuary. All rights reserved.
+    </footer>
+    
+    <script>
+        // AJAX form submission to Vercel API route
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!form.checkValidity()) {
+                alert('Please fill out all required fields.');
+                return;
+            }
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+                if (response.ok) {
+                    alert('Message sent successfully!');
+                    form.reset();
+                } else {
+                    alert('Error sending message.');
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
