@@ -12,20 +12,39 @@
             --primary-purple: #C49BC3; /* Lavender purple */
             --primary-red: #B56576;    /* Reddish */
             --primary-gold: #E1BC91;   /* Golden yellow */
-            --background-dark: #121212;
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --header-bg: #f0f0f0;
+            --section-bg: #e0e0e0;
+            --border-color: #cccccc;
+            --button-bg: var(--primary-red);
+            --button-hover: var(--primary-purple);
+            --button-text: #ffffff;
+            --accent-hover: var(--primary-gold);
+        }
+
+        body.dark {
+            --bg-color: #121212;
+            --text-color: #ffffff;
             --header-bg: #000000;
-            --text-light: #FFFFFF;
+            --section-bg: #1c1c1c;
+            --border-color: #333333;
+            --button-bg: var(--primary-red);
+            --button-hover: var(--primary-purple);
+            --button-text: #ffffff;
             --accent-hover: var(--primary-gold);
         }
 
         /* Global Styles */
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: var(--background-dark); color: var(--text-light); }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); }
         header { background-color: var(--header-bg); padding: 20px; text-align: center; }
         .logo { max-width: 200px; margin-bottom: 10px; }
-        nav { margin: 20px 0; }
-        nav a { color: var(--text-light); margin: 0 15px; text-decoration: none; font-weight: bold; }
+        nav { margin: 20px 0; display: flex; justify-content: center; align-items: center; }
+        nav a { color: var(--text-color); margin: 0 15px; text-decoration: none; font-weight: bold; }
         nav a:hover { color: var(--accent-hover); }
-        .hero { text-align: center; padding: 50px; background-color: #1c1c1c; } /* Kept subtle */
+        #theme-toggle { background: var(--button-bg); color: var(--button-text); border: none; padding: 5px 10px; cursor: pointer; margin-left: 20px; }
+        #theme-toggle:hover { background: var(--button-hover); }
+        .hero { text-align: center; padding: 50px; background-color: var(--section-bg); }
         .hero iframe { width: 100%; max-width: 800px; }
         .hero h1 { font-size: 3em; margin: 10px 0; color: var(--primary-pink); }
         .hero p { font-size: 1.5em; color: var(--primary-purple); }
@@ -34,8 +53,9 @@
         
         /* Responsive Design */
         @media (max-width: 768px) {
-            nav { display: flex; flex-direction: column; }
+            nav { flex-direction: column; }
             nav a { margin: 10px 0; }
+            #theme-toggle { margin: 10px 0 0; }
             .hero { padding: 20px; }
         }
     </style>
@@ -48,6 +68,7 @@
             <a href="/about.html">About</a>
             <a href="/portfolio.html">Portfolio</a>
             <a href="/contact.html">Contact</a>
+            <button id="theme-toggle">Toggle Theme</button>
         </nav>
     </header>
     
@@ -75,6 +96,19 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+            });
+        });
+
+        // Theme toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const toggle = document.getElementById('theme-toggle');
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark');
+            }
+            toggle.addEventListener('click', () => {
+                body.classList.toggle('dark');
+                localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
             });
         });
     </script>
